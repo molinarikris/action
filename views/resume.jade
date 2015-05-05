@@ -1,0 +1,23 @@
+extends layout
+block stylesheets
+  link(rel='stylesheet', href='/stylesheets/resumeStyles.css')
+block body
+  div.container
+    div(class='row')
+      div(class='col-md-2')
+        div(class='list-group')
+          -each lang in data
+            a(class='list-group-item', id= lang.name)= lang.name
+      div(class='col-md-8')
+        div.page-header
+          h1 <strong>My Resume. Look at it. Bask in it's glory.</strong>
+          p.lead This is to show potential employers, friends, and girls I hit on, all the neat stuff I can do with websites (but mainly employers).
+        ul
+          - for lang in data
+            div.page-header
+              h2
+                li
+                  a(id= lang.name)= lang.name
+            div.container
+                h3= lang.purpose
+                p= lang.description

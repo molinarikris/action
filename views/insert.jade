@@ -1,0 +1,32 @@
+extends layout
+block head
+block body
+  div(class='container')
+    div(class='page-header')
+      h1 Languages I know
+    div.langs.ui-accordion
+      - each lang in data
+        div(class='container')
+          h2= lang.name
+          div(class= lang.name)
+            p(class='lead')= lang.purpose
+            div.more
+              a(class='btn btn-sm btn-default' role="button" id= lang.name) More
+              div(class="langDesc well" id= lang._id style="display: none;")
+                p= lang.description
+                p My experience with #{lang.name}: #{lang.experience}  
+                button(class='showLess btn btn-sm btn-info' type='button' id= lang.name) Less
+                button(class="deleteLang btn btn-sm btn-danger" type='button' id= lang.name) Delete
+    form.insertData
+      h2(class='page-header') Insert a new language
+      input(type='text' placeholder='Name' class='form-control' id='name')
+      input(type='text' placeholder='Purpose' class='form-control' id='purpose')
+      textarea(placeholder='Description' class='form-control' rows='3' id='description')
+      - for (var x = 1; x < 6; x++)
+        label(class='radio-inline')
+          input(type='radio' name='expGroup' id='experience' value= '#{x}' checked='true')
+          p= x
+      div.message
+      button(id='send' class='btn btn-lg btn-primary btn-block' type='button') Save
+    append scripts
+      script(src='/javascripts/insert.js')
