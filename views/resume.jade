@@ -12,12 +12,14 @@ block body
         div.page-header
           h1 <strong>My Resume. Look at it. Bask in it's glory.</strong>
           p.lead This is to show potential employers, friends, and girls I hit on, all the neat stuff I can do with websites (but mainly employers).
-        - for lang in data
-          div.page-header
-            h2(id= lang.name)= lang.name
-          div.container
-              h3= lang.purpose
+        div.container#langs
+          - for lang in data
+            div.page-header
+              h2(id= lang.name)= lang.name
+              p(class='lead')= lang.purpose
+            div.container#container
               p= lang.description
+            br
 append scripts
   script(src='/javascripts/jquery.scrollTo.min.js')
   script(src='/javascripts/resumeScript.js')

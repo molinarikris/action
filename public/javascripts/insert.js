@@ -13,10 +13,14 @@ var insertScript = {
 				$('#purpose').val() === '' ||
 				$('#description').val() === ''
 			) {
+
 				$('.message').html("<div class='alert alert-danger'><strong>Error! Fill in the fields!</strong></div>");
-			} else if ($('#name').val().slice($('#name').val().length - 1, $('#name').val().length) === ' ') {
-				$('.message').html("<div class='alert alert-danger'><strong>Error! Last character of name can't be a space!</strong></div>");
-} else {
+
+			} else if ($('#name').val().indexOf(' ') !== -1) {
+
+				$('.message').html("<div class='alert alert-danger'><strong>Error! Language/Library name can't contain spaces!</strong></div>");
+				
+			} else {
 				var data = {
 					name: $('#name').val(),
 					purpose: $('#purpose').val(),
@@ -49,7 +53,7 @@ var insertScript = {
 				$(this).siblings().fadeIn();
 				$(this).hide();
 			}
-			ResumeScript.deleteLang();
+			insertScript.deleteLang();
 		});
 	},
 
@@ -57,7 +61,7 @@ var insertScript = {
 		$('.showLess').click(function() {
 			var lang = $(this).attr('id');
 			$('.langDesc').hide();
-			$('a#' + lang).fadeIn();
+			$('a:hidden').fadeIn();
 		});
 		$('.deleteLang').click(function(event) {
 			event.preventDefault();

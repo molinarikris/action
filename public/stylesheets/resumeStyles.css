@@ -2,12 +2,33 @@
   position: fixed;
   display: inline-block;
   float: left;
-  width: 16.666667%
+  width: 18%;
+  min-width: 100px;
+  max-width: 200px;
 }
+
 
 #content {
   display: inline-block;
   position: relative;
   float: none;
-  margin-left: 19.666666%;
+  margin-left: 25%;
+  width: 78%;
 }
+
+#langs {
+  width: 100%;
+}
+
+#container {
+  width: inherit;
+}
+
+.selected {
+  background-color: #82cffd;
+}
+
+.selected:hover{
+  background-color: #bfefff !important;
+}
+
