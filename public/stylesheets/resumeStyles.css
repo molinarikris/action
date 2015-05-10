@@ -1,0 +1,13 @@
+#sideBar {
+  position: fixed;
+  display: inline-block;
+  float: left;
+  width: 16.666667%
+}
+
+#content {
+  display: inline-block;
+  position: relative;
+  float: none;
+  margin-left: 19.666666%;
+}

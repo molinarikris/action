@@ -1,4 +1,4 @@
-var ResumeScript = {
+var insertScript = {
 
 	init: function() {
 		this.saveLang();
@@ -79,5 +79,5 @@ var ResumeScript = {
 };
 
 $(document).ready(function() {
-	ResumeScript.init();
+	insertScript.init();
 });
