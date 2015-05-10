@@ -21,6 +21,7 @@ var insertScript = {
 				$('.message').html("<div class='alert alert-danger'><strong>Error! Language/Library name can't contain spaces!</strong></div>");
 				
 			} else {
+				$(this).addClass('disabled');
 				var data = {
 					name: $('#name').val(),
 					purpose: $('#purpose').val(),
