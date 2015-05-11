@@ -1,9 +1,8 @@
 var express = require('express');
-var mongo = require('mongodb').MongoClient;
 var db = require('../dbSetup');
 var router = express.Router();
 
-// Intersite Routing
+// ---------------->> Intersite Routing <<----------------
 
 router.get('/', function(req, res) {
 	res.render('index', {
@@ -34,7 +33,19 @@ router.get('/insert', function(req, res) {
 	});
 });
 
-// Database CRUD Routes
+router.get('/about', function(req, res) {
+	res.render('about', {
+			title: 'About me'
+	});
+});
+
+router.get('/contact', function(req, res) {
+	res.render('contact', {
+			title: 'Contact me'
+	});
+});
+
+// ---------------->> Database CRUD Routes <<----------------
 
 router.get('/getlangs', function(req, res) {
 	db.getData(null, function(err, docs) {

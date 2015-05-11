@@ -1,0 +1,30 @@
+extends layout
+block stylesheets
+  link(rel='stylesheet', href='/stylesheets/infoPage.css')
+block body
+  mixin chunk(title, sub)
+    .container
+      .page-header
+        h1 #{title}
+        p.lead <i>#{sub}</i>
+      if block
+        block
+      else
+        p I'll think of something later.
+
+  mixin list(items)
+    ul
+      each item in items
+        li= item
+  div.jumbotron
+    div.container
+      h1 About Me 
+      p The part where I get to talk about myself. And how awesome I am.
+  +chunk('Education', "So important it's first.")
+    p Self-education is a subject that I am hugely fond of. Having experienced state education in Tennessee (through Heritage High School and Tennessee Tech University), I know that in order to make the leaps and bounds that my dreams demand, I have to take my education into my own hands. Since January of 2015; the things that I learn, how I learn them, and the attitude I have towards learning have been going through huge positive changes.
+    p <i>So what do you learn about?</i>
+    p I'm glad you asked! My primary subject material include:
+    +list(['Programming', 'History', 'Psychology/Sociology', 'Music', 'Business'])
+    p My programming education revolves around the creation of this website and other projects; such as server-side applications, program creation, and problem-solving.
+    p History is one of the most important subjects to know thoroughly and completely. A knowledge of all aspects of History can prevent major mistakes, explain interpersonal behavior, and expand your mind to a level of understanding through comparison.
+

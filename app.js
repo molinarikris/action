@@ -5,6 +5,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var mongodb = require('mongodb');
+var details = require('./package.json');
 
 
 var routes = require('./routes/index');
@@ -15,6 +16,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.locals.version = details.version;
 
 app.use(favicon());
 app.use(logger('dev'));
