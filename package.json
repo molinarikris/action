@@ -1,9 +1,9 @@
 {
   "name": "Action",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "private": true,
   "scripts": {
-    "start": "nodejs ./bin/www",
+    "start": "node ./bin/www",
     "test": "node node_modules/karma/bin/karma start test/karma.conf.js",
     "db": "mongo resume1"
   },
@@ -18,7 +18,9 @@
     "mongodb": "*",
     "mongoose": "*",
     "bower": "*",
-    "karma": "*"
+    "karma": "*",
+    "nodemon": "*",
+    "emailjs": "*"
   },
   "devDependencies": {
     "jasmine-core": "^2.2.0",

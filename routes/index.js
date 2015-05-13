@@ -1,5 +1,6 @@
 var express = require('express');
-var db = require('../dbSetup');
+var db = require('../controllers/dbController');
+var email = require('../controllers/emailController');
 var router = express.Router();
 
 // ---------------->> Intersite Routing <<----------------
@@ -42,6 +43,18 @@ router.get('/about', function(req, res) {
 router.get('/contact', function(req, res) {
 	res.render('contact', {
 			title: 'Contact me'
+	});
+});
+
+router.post('/contact', function(req, res) {
+	var emailBody = {
+		text: req.body.body,
+		from: req.body.name + "<" + req.body.email + ">",
+		to: "TheFullStackGuy@gmail.com",
+		subject: req.body.subject + " | molinarikris.com"
+	};
+	email.send(emailBody, function(err, message) {
+		res.send({msg: err});
 	});
 });
 
