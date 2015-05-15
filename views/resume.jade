@@ -2,24 +2,24 @@ extends layout
 block stylesheets
   link(rel='stylesheet', href='/stylesheets/resumeStyles.css')
 block body
-  div.container
+  div#mainContainer.container
     div(class='row')
       div(id='sideBar')
         div(class='list-group')
           -each lang in data
             a(class='list-group-item', id= lang.name)= lang.name
       div(class='col-md-8' id='content')
-        div.page-header
-          h1 <strong>My Resume. Look at it. Bask in it's glory.</strong>
+        div.jumbotron
+          h1 My Resume. Look at it. Bask in it's glory.
           p.lead This is to show potential employers, friends, and girls I hit on, all the neat stuff I can do with websites (but mainly employers).
         div.container#langs
           - for lang in data
-            div.page-header
-              h2(id= lang.name)= lang.name
-              p(class='lead')= lang.purpose
-            div.container#container
-              p= lang.description
-            br
+            div.content
+              div.page-header
+                h2(id= lang.name)= lang.name
+                p= lang.purpose
+              div.container#container
+                p= lang.description
 append scripts
   script(src='/javascripts/jquery.scrollTo.min.js')
   script(src='/javascripts/resumeScript.js')

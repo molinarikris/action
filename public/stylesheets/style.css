@@ -1,7 +1,12 @@
+* {
+  color: #fff;
+}
+
 body {
   padding-top: 50px;
   padding-bottom: 20px;
   font: 14px Lucida Sans, Helvetica, Arial, sans-serif;
+  background-color: #333;
 }
 
 a {
@@ -18,12 +23,12 @@ a {
   display: none;
 }
 
-.ui-accordion-content-active {
-  height: 170px;
-}
-
 .message {
   position: relative;
+}
+
+.jumbotron {
+  background-color: #999;
 }
 
 .form-signin {
@@ -61,4 +66,5 @@ a {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
 
