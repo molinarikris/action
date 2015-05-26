@@ -19,3 +19,12 @@ block body
         p
           a(class='btn btn-primary' href='/about' role='button') About me &raquo; 
           a(class='btn btn-primary' href='/blog' role='button') My blog &raquo;
+    div.cookies
+      -if (sessionData)
+        p= sessionData.username
+      -if (sessionData)
+        p= sessionData.permissions
+      -if (cookies)
+        p= JSON.stringify(cookies)
+      -else
+        p No cookies :(

@@ -1,16 +1,32 @@
 var express = require('express');
-var db = require('../controllers/dbController');
 var email = require('../controllers/emailController');
 var router = express.Router();
+var db = require('../controllers/dbController')('resume1', 'collections');
 
 // ---------------->> Intersite Routing <<----------------
 
 router.get('/', function(req, res) {
-	res.render('index', {
-		title: 'Home'
-	});
+	var sess = req.session;
+	if (sess.cookie) {
+		if (sess.username) {
+			sess.save(function(err) {
+				res.render('index', {
+					title: 'Home',
+					cookies: sess.id
+				});
+			});
+		} else {
+			res.render('index', {
+				title: 'Home',
+				username: "anon",
+				perms: ["none"],
+				cookies: req.cookies
+			});
+		}
+	} else {
+		res.redirect('/login');
+	}
 });
-
 
 router.get('/resume', function(req, res) {
 	db.getData(null, function(err, docs) {
@@ -19,7 +35,8 @@ router.get('/resume', function(req, res) {
 		} else {
 			res.render('resume', {
 				title: 'My Resume',
-				data: docs
+				data: docs,
+				sessionData: req.session
 			});
 		};
 	});
@@ -29,20 +46,23 @@ router.get('/insert', function(req, res) {
 	db.getData(null, function(err, docs) {
 		res.render('insert', {
 				title: 'DB Insertion',
-				data: docs
+				data: docs,
+				sessionData: req.session
 		});
 	});
 });
 
 router.get('/about', function(req, res) {
 	res.render('about', {
-			title: 'About me'
+			title: 'About me',
+			sessionData: req.session
 	});
 });
 
 router.get('/contact', function(req, res) {
 	res.render('contact', {
-			title: 'Contact me'
+			title: 'Contact me',
+			sessionData: req.session
 	});
 });
 
@@ -56,6 +76,22 @@ router.post('/contact', function(req, res) {
 	email.send(emailBody, function(err, message) {
 		res.send({msg: err});
 	});
+});
+
+router.get('/login', function(req, res) {
+	if(req.protocol == "http") {
+		res.redirect("https://" + req.headers["host"] + req.url);
+	} else {
+		res.render('login', {title: "Log In"});
+	}
+});
+
+router.get('/signup', function(req, res) {
+	if(req.protocol == "http") {
+		res.redirect("https://" + req.headers["host"] + req.url);
+	} else {
+		res.render('signup', {title: "Sign Up"});
+	}
 });
 
 // ---------------->> Database CRUD Routes <<----------------
@@ -98,7 +134,7 @@ router.post('/insert', function(req, res) {
 			res.send({msg: err, result: result});
 		} else {
 			res.send({msg: '', result: result});
-		};
+		}
 	});	
 });
 

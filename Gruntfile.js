@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 			}
 		},
 		jshint: {
-			files: ['Gruntfile.js', 'app.js', 'public/javascripts/*.js'],
+			files: ['Gruntfile.js', 'app.js', 'controllers/*.js', 'public/javascripts/*.js'],
 			options: {
 				globals: {
 					jQuery: true,

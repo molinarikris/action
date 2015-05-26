@@ -4,6 +4,8 @@ var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var mongosesh = require('connect-mongodb-session')(session);
 var mongodb = require('mongodb');
 var details = require('./package.json');
 
@@ -22,7 +24,27 @@ app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
+
+app.use(cookieParser("sVqLFDh3dNVlfR2"));
+app.use(session({
+	resave: false,
+	saveUninitialized: false,
+	secret: "sVqLFDh3dNVlfR2",
+	store: new mongosesh({
+		uri: 'mongodb://localhost:27017/sessions',
+		collection: 'resume'
+	}),
+	cookie: {maxAge: 60000*60*24*7, secure: true}
+}));
+app.use(function(req, res, next) {
+	if (req.session.username) {
+		res.locals.sessionData = req.session;
+		next();
+	} else {
+		next();
+	}
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -43,7 +65,7 @@ app.use(function(req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
-            error: err
+            error: err,
         });
     });
 

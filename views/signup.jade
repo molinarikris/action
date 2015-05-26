@@ -1,0 +1,22 @@
+extends ./login
+
+block title
+  .container
+    .page-header
+      h1 Sign up to have a blast!
+
+block others
+  .form-group
+    label(for="confPswd").col-xs-3.col-lg-2.control-label Confirm Password
+    .col-xs-9.col-lg-9
+      input(type="password" placeholder="Confirm Password").form-control#confPswd
+  .form-group
+    label(for="email").col-xs-3.col-lg-2.control-label Email
+    .col-xs-9.col-lg-9
+      input(type="email" placeholder="Your email").form-control#email
+  .form-group
+    .col-lg-offset-2.col-xs-12.col-lg-10
+      button(type="button")#go.btn.btn-success Sign-Up!
+
+append scripts
+  script(src='/javascripts/signUpScript.js')

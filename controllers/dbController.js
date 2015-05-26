@@ -1,10 +1,14 @@
 var mongo = require('mongodb').MongoClient;
 
-var dbConfig = {
+var dbConfig = function(db, collection) {
+    var dbName = db;
+    var col = collection;
+
+    return {
 
 	connection: function(callback) {
-		mongo.connect('mongodb://localhost:27017/resume1', function(err, db) {
-			if (err) callback(err);
+		mongo.connect('mongodb://localhost:27017/' + dbName, function(err, db) {
+			if (err) callback(null, err);
 			else callback(null, db);
 		});
 	},
@@ -14,16 +18,15 @@ var dbConfig = {
 			if (err) {
 				throw err;
 			} else if (params) {
-				db.collection('collections').find(params)
-				.toArray(function(err, docs) {
+				db.collection(col).find(params).toArray(function(err, docs) {
 					if (err) {
 						callback(err);
 					} else {
 						callback(null, docs);
-					};
+					}
 				});
 			} else {
-				db.collection('collections').find().toArray(function(err, docs){
+				db.collection(col).find().toArray(function(err, docs){
 					if (err) {
 						callback(err);
 					} else {
@@ -39,7 +42,7 @@ var dbConfig = {
 			if (err) {
 				throw err;
 			} else {
-				db.collection('collections').insert(data, function(err, result){
+				db.collection(col).insert(data, function(err, result){
 					if (err) {
 						callback(err);
 					} else {
@@ -55,7 +58,7 @@ var dbConfig = {
 			if (err) {
 				throw err;
 			} else {
-				db.collection('collections').remove(params, function(err, result) {
+				db.collection(col).remove(params, function(err, result) {
 					if (err) {
 						callback(err);
 					} else {
@@ -71,7 +74,7 @@ var dbConfig = {
 			if (err) {
 				throw err;
 			} else {
-				db.collection('collections').update(params, data, function(err, result) {
+				db.collection(col).update(params, data, function(err, result) {
 					if (err) {
 						callback(err);
 					} else {
@@ -81,6 +84,7 @@ var dbConfig = {
 			};
 		});
 	}
+    }
 };
 	
 module.exports = dbConfig;

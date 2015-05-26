@@ -33,6 +33,15 @@ html
                  a(href="/about") About Me
                li
                  a(href="/contact") Contact Me
+               if (sessionData)
+                 if (sessionData.username !== 'anon') 
+                   li
+                     a(href="/#{sessionData.username}") #{sessionData.username}
+                   li
+                     a(href="/users/logout/#{sessionData.username}") Log Out
+               else
+                 li
+                   a(href="/login") Login
     block body
     block scripts
       script(src='/javascripts/jquery.min.js')
