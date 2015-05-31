@@ -10,3 +10,14 @@ Javascript is the primary language used to create this resume. Javascript is use
 ## Web Development Best Practices
 
 This website is a strong way to demonstrate a trial-by-fire of Best Practices. Implementation of version-control, terse programming, program life-cycles, and making efficent use of resources are challenges that are solved building the website from scratch, testing, and maintaining the website.
+
+## Install it and check it out.
+
+If you'd like to grab the server and run your own instance,
+	$ git pull git@github.com:molinarikris/action.git
+	$ sudo npm install
+You will need to make a `/certs` file with your ssl key and certificates. Add these to `bin/www` to enable logins and https:// .
+
+After everything is set up,
+	$ npm start #sudo npm start if you use port 80.
+
