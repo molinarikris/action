@@ -71,12 +71,7 @@ router.post('/loginuser', function(req, res) {
 
 router.get('/logout/:user', function(req, res) {
 	req.session.destroy(function(err) {
-		res.render('index', {
-			title: "Logged Out.",
-			username: "anon",
-			perms: ["none"],
-			cookies: req.cookies
-		});
+		res.redirect('/');
 	});
 });
 

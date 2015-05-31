@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: #b0d692;
+  background-color: #79a658;
 }
 
 .navbar-inverse {
@@ -32,12 +32,12 @@ body {
 
 .jumbotron {
   margin-top: 15px;
-  background-color: #cfc1a0;
+  background-color: #e4da9b;
   border-color: #281e05 !important;
 }
 
 .jumbotron h1 {
-  color: #433209;
+  color: #522b05;
 }
 
 #content {
@@ -46,11 +46,11 @@ body {
   float: none;
   margin-left: 26%;
   width: 72%;
-  border: 1px solid #8b5a00;
+  border: 1px solid #304223;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   box-shadow: 0px 0px 3px 3px #8b5a00;
-  background-color: #3a6716;
+  background-color: #28480f;
   padding: 2%;
 }
 
@@ -83,7 +83,7 @@ h1 {
 }
 
 h2, h3, h4 {
-  color: #433209;
+  color: #522b05;
 }
 
 .lead {
@@ -95,7 +95,8 @@ h2, h3, h4 {
 }
 
 .list-group-item {
-  background-color: #dfeed3;
+  background-color: #e4da9b;
+  border-color: #522b05;
 }
 
 .list-group-item:hover {
@@ -104,7 +105,7 @@ h2, h3, h4 {
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
   background-image: linear-gradient(to bottom, #61ad25 0px, #437919 100%);
-  border-color: #437919;
+  border-color: #522b05;
 }
 
 #langs {

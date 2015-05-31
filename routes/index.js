@@ -7,24 +7,18 @@ var db = require('../controllers/dbController')('resume1', 'collections');
 
 router.get('/', function(req, res) {
 	var sess = req.session;
-	if (sess.cookie) {
-		if (sess.username) {
-			sess.save(function(err) {
-				res.render('index', {
-					title: 'Home',
-					cookies: sess.id
-				});
-			});
-		} else {
+	if (sess.username) {
+		sess.save(function(err) {
 			res.render('index', {
 				title: 'Home',
-				username: "anon",
-				perms: ["none"],
-				cookies: req.cookies
+				sessionData: req.session
 			});
-		}
+		});
 	} else {
-		res.redirect('/login');
+		res.render('index', {
+			title: 'Home',
+			sessionData: req.session
+		});
 	}
 });
 

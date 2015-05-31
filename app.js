@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-var favicon = require('static-favicon');
+var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
@@ -20,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.locals.version = details.version;
 
-app.use(favicon());
+app.use(favicon(__dirname + '/public/images/favicon-16x16.png'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -37,12 +37,8 @@ app.use(session({
 	cookie: {maxAge: 60000*60*24*7, secure: true}
 }));
 app.use(function(req, res, next) {
-	if (req.session.username) {
-		res.locals.sessionData = req.session;
-		next();
-	} else {
-		next();
-	}
+	res.locals.sessionData = req.session;
+	next();
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -61,13 +57,17 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err,
-        });
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    if (!err.status) {
+	var err = new Error('Internal Server Error!')
+	err.status = 500;
+    }
+    res.render('error', {
+        message: err.message,
+        error: err,
     });
+});
 
 // production error handler
 // no stacktraces leaked to user
