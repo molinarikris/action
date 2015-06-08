@@ -2,6 +2,7 @@ var express = require('express');
 var email = require('../controllers/emailController');
 var router = express.Router();
 var db = require('../controllers/dbController')('resume1', 'collections');
+var blogdb = require('../controllers/dbController')('posts', 'resume');
 
 // ---------------->> Intersite Routing <<----------------
 
@@ -36,20 +37,20 @@ router.get('/resume', function(req, res) {
 	});
 });
 
-router.get('/insert', function(req, res) {
-	db.getData(null, function(err, docs) {
-		res.render('insert', {
-				title: 'DB Insertion',
-				data: docs,
-				sessionData: req.session
-		});
-	});
-});
-
 router.get('/about', function(req, res) {
 	res.render('about', {
 			title: 'About me',
 			sessionData: req.session
+	});
+});
+
+router.get('/blog', function(req, res) {
+	blogdb.getData(null, function(err, posts) {
+		res.render('blogHome', {
+			title: 'Action',
+			sessionData: req.session,
+			posts: posts
+		});
 	});
 });
 

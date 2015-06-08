@@ -1,0 +1,18 @@
+extends layout
+
+
+block body
+  .container
+    - if (sessionData.permissions.indexOf('admin') !== -1) { var admin = true }else{var admin = false;}
+    if admin
+      .page-header
+        h2 Administration Page
+      a(href='/admin')
+        button.btn.btn-primary Go
+    - if(sessionData.permissions.indexOf('poster') > -1) { var curator = true } else{ var curator = false;}
+    if curator
+      .page-header
+        h2 Curator Page
+      a(href='/curator')
+        button.btn.btn-primary Go
+      

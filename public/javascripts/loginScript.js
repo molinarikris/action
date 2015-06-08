@@ -19,33 +19,46 @@ var login = {
 	},
 
 	init: function() {
+		$('#pswd').keyup(function(event){
+			if (event.keyCode == 13) {
+				if(login.checkForBlanks && login.validatePass) {
+					login.sendOff();
+				} else {
+					$('#username').val('Uh Oh!');
+				}
+			}
+		});
 		$('#signIn').click(function(event) {
 			event.preventDefault();
-			$(this).toggleClass('disabled');
-			if(login.checkForBlanks && login.validatePass) {
-				var user = {
-					username: $('#username').val(),
-					password: $('#pswd').val()
-				};
-				$('#pswd').val('');
-				$.ajax({
-					type: 'POST',
-					data: user,
-					url: '/users/loginuser',
-					dataType: 'JSON'
-				}).done(function(res) {
-					if(!res.msg) {
-						window.location = "/";
-					} else {
-						$('.badmessage').show();
-						$('.badmessage:first-child').html(JSON.stringify(res.msg));
-					}
-				});	
+			if (login.checkForBlanks && login.validatePass) {
+				login.sendOff();
 			} else {
 				$('#username').val('Uh Oh!');
 			}
 		});
+	},
+
+	sendOff: function() {
+			var user = {
+				username: $('#username').val(),
+				password: $('#pswd').val()
+			};
+			$('#pswd').val('');
+			$.ajax({
+				type: 'POST',
+				data: user,
+				url: '/users/loginuser',
+				dataType: 'JSON'
+			}).done(function(res) {
+				if(!res.msg) {
+					window.location = "/";
+				} else {
+					$('.badmessage').show();
+					$('.badmessage:first-child').html(JSON.stringify(res.msg));
+				}
+			});	
 	}
+
 
 
 

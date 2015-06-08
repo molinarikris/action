@@ -1,0 +1,21 @@
+extends layout
+
+block body
+  .container
+    .page-header
+      h1 Compose Your Smarts.
+  .container
+    form
+      .form-group
+        label(for="title") Title
+        input.form-control#title(placeholder="Make sure your title is clever")
+      .form-group
+        label(for="body") Body
+        textarea.form-control#body(rows="8" placeholder="The most important part of the post. Make sure it's filled with awesome.")
+      button.btn.btn-primary Submit!
+  .container
+    .message.alert(style="{display:none}")
+      p
+
+append scripts
+  script(src='/javascripts/composeScript.js')

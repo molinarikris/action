@@ -7,18 +7,19 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var mongosesh = require('connect-mongodb-session')(session);
 var mongodb = require('mongodb');
-var details = require('./package.json');
 
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var admin = require('./routes/admin');
+var curator = require('./routes/poster');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.locals.version = details.version;
+app.locals.version = require('./package.json').version;
 
 app.use(favicon(__dirname + '/public/images/favicon-16x16.png'));
 app.use(logger('dev'));
@@ -45,6 +46,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/admin', admin);
+app.use('/curator', curator);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -64,8 +67,10 @@ app.use(function(err, req, res, next) {
 	err.status = 500;
     }
     res.render('error', {
-        message: err.message,
-        error: err,
+	error: {
+	  status: err.status,
+	  message: err.message
+	}
     });
 });
 

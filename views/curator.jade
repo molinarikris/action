@@ -1,0 +1,19 @@
+extends layout
+
+block body
+  .container
+    .page-header
+      h1 Welcome back, #{sessionData.username}.
+      p.lead We knew you'd be back eventually.
+  .container
+    .row
+      .col-md-6
+        h2 View Your Posts
+        p Check out your genius. See, edit, and review your previous posts.
+        a(href="/curator/posts/#{sessionData.username}")
+          button.btn.btn-default View
+      .col-md-6
+        h2 Make a New Post
+        p Enlighten the world. Add a new post and send it away for review.
+        a(href="/curator/newPost")
+          button.btn.btn-default New

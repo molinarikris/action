@@ -1,0 +1,19 @@
+extends layout
+
+mixin blogPost(title, date, author, body)
+  .container
+    .page-header
+      h2= title
+      p.lead Written by #{author} on #{date}.
+    - var bit = body.substring(0, 100)
+    p #{bit}...<a href='/blog/#{title}'>[Read More]</a>
+
+block body
+  .container
+    .page-header
+      h1 Ow!
+      p.lead Enjoy these hot, fresh blog posts.
+      p I only got second-degree burns getting them for you
+    each post in posts
+      +blogPost(post.title, post.date, post.author, post.body)
+  

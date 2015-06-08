@@ -76,13 +76,10 @@ router.get('/logout/:user', function(req, res) {
 });
 
 router.get('/:user', function(req, res) {
-	db.getData({username: req.session.username}, function(err, docs) {
-		res.render('userpage', {
+		res.render('user', {
 			title: req.session.username,
-			data: docs,
 			sessionData: req.session
 		});
-	});
 });
 
 module.exports = router;
