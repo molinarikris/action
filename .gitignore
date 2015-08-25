@@ -1,0 +1,6 @@
+/certs/
+/node_modules/
+/controllers/emailController.js
+*.swp
+*.swo
+*~
